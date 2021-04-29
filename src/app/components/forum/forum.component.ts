@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { ForumService } from 'src/app/services/forum/forum.service';
 import { DetailForumService } from 'src/app/services/forum/detail-forum/detail-forum.service';
 import { ForumModel } from 'src/app/models/forum.model';
@@ -12,7 +13,8 @@ export class ForumComponent implements OnInit {
 
   constructor(
     private forumService: ForumService,
-    private detailForumService: DetailForumService
+    private detailForumService: DetailForumService,
+    private router: Router
   ) { }
   
   forumIds: any;
@@ -47,7 +49,7 @@ export class ForumComponent implements OnInit {
           forumObj.kids = result.kids === undefined ? [] : result.kids;
           forumObj.score = result.score;
           forumObj.text = result.text;
-          forumObj.time = result.time;
+          forumObj.time = result.time * 1000;
           forumObj.title = result.title;
           forumObj.type = result.type;
           this.forumList.push(forumObj)

@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { HttpClientModule } from '@angular/common/http';
+import { MomentPipesModule } from 'ng-moment-pipes';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -20,6 +21,7 @@ import { DetailForumComponent } from './components/forum/detail-forum/detail-for
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
+    MomentPipesModule,
     NgbModule
   ],
   providers: [],
