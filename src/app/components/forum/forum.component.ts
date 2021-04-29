@@ -6,7 +6,6 @@ import { ForumDataProvider } from 'src/app/services/forum/forum.data-provider';
 import { DetailForumService } from 'src/app/services/forum/detail-forum/detail-forum.service';
 
 import { ForumModel } from 'src/app/models/forum.model';
-import { CommentModel } from 'src/app/models/comment.model';
 
 @Component({
   selector: 'app-forum',
@@ -22,6 +21,7 @@ export class ForumComponent implements OnInit {
     private router: Router
   ) { }
   
+  // initialize vars and data
   loading = true;
   page = 1;
   pageSize = 20;
@@ -29,14 +29,14 @@ export class ForumComponent implements OnInit {
   forumList: Array<ForumModel> = [];
 
   ngOnInit(): void {
-    debugger
+    // get cache data from global vars then map to list forum data
     const cacheData = this.forumDataProvider.getForumDataCache;
     this.forumList = cacheData.map(item => Object.assign([], item));
     
-    if (this.forumList.length > 0) {
+    if (this.forumList.length > 0) { // if any data in cache then render it
       this.loading = false;
     }
-    else {
+    else { // if there is no data in cache, then fetch from api
       this.getForum();
     }
   }
@@ -48,6 +48,7 @@ export class ForumComponent implements OnInit {
           this.forumIds = result;
           if (this.forumIds === undefined) this.forumList = [];
           else {
+            // fetch detail forum for each data
             this.forumIds.forEach((val) => {
               this.getDetailForum(val);
             });
@@ -76,6 +77,8 @@ export class ForumComponent implements OnInit {
           forumObj.type = result.type;
           forumObj.comments = [];
           this.forumList.push(forumObj);
+
+          // save fetched data to global vars/cache
           this.forumDataProvider.setForumDataCache(forumObj);
         },
         error => {
@@ -83,7 +86,9 @@ export class ForumComponent implements OnInit {
         });
   }
 
+  // on click event when a table row clicked
   goToDetail(id: number): void {
+    // navigate to detail page, pass id of forum
     this.router.navigate(['/forum/', id]);
   }
 }

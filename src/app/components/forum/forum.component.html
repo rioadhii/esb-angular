@@ -1,17 +1,23 @@
 <div class="list row">
+    <!--Start of loading indicator-->
     <div *ngIf="loading" class="col-md-12 container text-center">
       <h5>Fetching data...</h5>
     </div>
+    <!--End of loading indicator-->
 
     <div *ngIf="!loading" class="col-md-12">
+      <!--Start of navigation toolsbar-->
       <div class="breadcrumb">
         <a class="nounderline" aria-disabled="true">
             <i class="fa fa-home"></i>&nbsp;Forum
         </a>
       </div>
+      <!--End of navigation toolsbar-->
+
       <div *ngIf="forumList.length > 0">
         <table class="table">
           <tbody>
+            <!--Start of row per item-->
             <tr class="clickable" (click)="goToDetail(data.id)" *ngFor="let data of forumList | slice: (page-1) * pageSize : (page-1) * pageSize + pageSize; index as i">
               <td [ngClass]="{'first-row': i === 0}">
                   <p>
@@ -21,22 +27,31 @@
                   <p>
                     <b><h5>{{ data.title }}</h5></b>
                   </p> 
-                  <small><b>Type: </b> {{ data.type }} | </small>
                   <small ngbTooltip="Score" placement="bottom"><i class="fa fa-thumbs-o-up"></i>&nbsp;{{ data.score }} 
                   </small>&nbsp;<small ngbTooltip="Comments" placement="bottom"><i class="fa fa-comments-o"></i>&nbsp;{{ data.kids.length }}</small>
               </td>
             </tr>
+            <!--End of row per item-->
           </tbody>
         </table>
+
+        <!--Start of pagination indicator-->
         <div class="d-flex justify-content-center">
           <ngb-pagination [collectionSize]="forumList.length" [pageSize]="pageSize" [(page)]="page" [maxSize]="0" [rotate]="true" [ellipses]="false" [boundaryLinks]="true"></ngb-pagination>
         </div>
+        <!--End of pagination indicator-->
       </div>
+
+      <!--Start of no data indicator-->
       <div *ngIf="forumList.length === 0" class="container text-center">
         <h5>No discussions available</h5>
       </div>
+      <!--End of no data indicator-->
+
+      <!--Start of total data indicator-->
       <div class="d-flex justify-content-center">
         <p>Total discussions: {{ forumList.length }}</p>
       </div>
+      <!--End of total data indicator-->
     </div>
 </div>
