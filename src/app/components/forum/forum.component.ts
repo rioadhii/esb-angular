@@ -33,8 +33,8 @@ export class ForumComponent implements OnInit {
     this.forumService.getAll()
       .subscribe(
         result => {
-          this.forumIds = result; // dont forget here
-
+          this.forumIds = result;
+          
           if (this.forumIds === undefined) this.forumList = [];
           else {
             this.forumIds.forEach((val) => {

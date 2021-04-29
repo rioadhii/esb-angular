@@ -2,35 +2,38 @@
     <div *ngIf="loading" class="col-md-12 container text-center">
       <h5>Fetching data...</h5>
     </div>
-    <div *ngIf="!loading && forumList.length > 0" class="col-md-12">
+
+    <div *ngIf="!loading" class="col-md-12">
       <div class="breadcrumb">
         <a class="nounderline" aria-disabled="true">
             <i class="fa fa-home"></i>&nbsp;Forum
         </a>
       </div>
-      <table class="table">
-        <tbody>
-          <tr class="clickable" (click)="goToDetail(data.id)" *ngFor="let data of forumList | slice: (page-1) * pageSize : (page-1) * pageSize + pageSize; index as i">
-            <td [ngClass]="{'first-row': i === 0}">
-                <p>
-                  <small>Posted by <i class="text-primary"><b>{{ data.by }}</b></i></small>
-                  <small class="pull-right">{{ data.time | momentRelative }}</small>
-                </p>   
-                <p>
-                  <b><h5>{{ data.title }}</h5></b>
-                </p> 
-                <small><b>Type: </b> {{ data.type }} | </small>
-                <small ngbTooltip="Score" placement="bottom"><i class="fa fa-thumbs-o-up"></i>&nbsp;{{ data.score }} 
-                </small>&nbsp;<small ngbTooltip="Comments" placement="bottom"><i class="fa fa-comments-o"></i>&nbsp;{{ data.kids.length }}</small>
-            </td>
-          </tr>
-        </tbody>
-      </table>
-      <div class="d-flex justify-content-center">
-        <ngb-pagination [collectionSize]="forumList.length" [pageSize]="pageSize" [(page)]="page" [maxSize]="0" [rotate]="true" [ellipses]="false" [boundaryLinks]="true"></ngb-pagination>
+      <div *ngIf="forumList.length > 0">
+        <table class="table">
+          <tbody>
+            <tr class="clickable" (click)="goToDetail(data.id)" *ngFor="let data of forumList | slice: (page-1) * pageSize : (page-1) * pageSize + pageSize; index as i">
+              <td [ngClass]="{'first-row': i === 0}">
+                  <p>
+                    <small>Posted by <i class="text-primary"><b>{{ data.by }}</b></i></small>
+                    <small class="pull-right">{{ data.time | momentRelative }}</small>
+                  </p>   
+                  <p>
+                    <b><h5>{{ data.title }}</h5></b>
+                  </p> 
+                  <small><b>Type: </b> {{ data.type }} | </small>
+                  <small ngbTooltip="Score" placement="bottom"><i class="fa fa-thumbs-o-up"></i>&nbsp;{{ data.score }} 
+                  </small>&nbsp;<small ngbTooltip="Comments" placement="bottom"><i class="fa fa-comments-o"></i>&nbsp;{{ data.kids.length }}</small>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+        <div class="d-flex justify-content-center">
+          <ngb-pagination [collectionSize]="forumList.length" [pageSize]="pageSize" [(page)]="page" [maxSize]="0" [rotate]="true" [ellipses]="false" [boundaryLinks]="true"></ngb-pagination>
+        </div>
       </div>
-    </div>
-    <div *ngIf="!loading && forumList.length === 0" class="col-md-12 container text-center">
-      <h5>No discussions available</h5>
+      <div *ngIf="forumList.length === 0" class="container text-center">
+        <h5>No discussions available</h5>
+      </div>
     </div>
 </div>
