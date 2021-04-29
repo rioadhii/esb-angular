@@ -31,11 +31,14 @@ export class ForumComponent implements OnInit {
   ngOnInit(): void {
     debugger
     const cacheData = this.forumDataProvider.getForumDataCache;
-    console.log("Data", JSON.stringify(cacheData));
     this.forumList = cacheData.map(item => Object.assign([], item));
     
-    if (this.forumList.length > 0) this.loading = false;
-    else this.getForum();
+    if (this.forumList.length > 0) {
+      this.loading = false;
+    }
+    else {
+      this.getForum();
+    }
   }
 
   getForum(): void {

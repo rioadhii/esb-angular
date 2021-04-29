@@ -10,7 +10,6 @@ export class ForumDataProvider {
     public forumDataCache: any = [];
 
     setForumDataCache(data: any) {
-        this.forumDataCache = [];
         this.forumDataCache.push(data);
     }
 
