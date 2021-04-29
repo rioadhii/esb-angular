@@ -2,7 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 
 import { ForumService } from 'src/app/services/forum/forum.service';
+import { ForumDataProvider } from 'src/app/services/forum/forum.data-provider';
 import { DetailForumService } from 'src/app/services/forum/detail-forum/detail-forum.service';
+
 import { ForumModel } from 'src/app/models/forum.model';
 import { CommentModel } from 'src/app/models/comment.model';
 
@@ -15,6 +17,7 @@ export class ForumComponent implements OnInit {
 
   constructor(
     private forumService: ForumService,
+    private forumDataProvider: ForumDataProvider,
     private detailForumService: DetailForumService,
     private router: Router
   ) { }
@@ -26,7 +29,13 @@ export class ForumComponent implements OnInit {
   forumList: Array<ForumModel> = [];
 
   ngOnInit(): void {
-    this.getForum();
+    debugger
+    const cacheData = this.forumDataProvider.getForumDataCache;
+    console.log("Data", JSON.stringify(cacheData));
+    this.forumList = cacheData.map(item => Object.assign([], item));
+    
+    if (this.forumList.length > 0) this.loading = false;
+    else this.getForum();
   }
 
   getForum(): void {
@@ -34,13 +43,13 @@ export class ForumComponent implements OnInit {
       .subscribe(
         result => {
           this.forumIds = result;
-          
           if (this.forumIds === undefined) this.forumList = [];
           else {
             this.forumIds.forEach((val) => {
               this.getDetailForum(val);
             });
-          }
+          }  
+
           this.loading = false;
         },
         error => {
@@ -64,6 +73,7 @@ export class ForumComponent implements OnInit {
           forumObj.type = result.type;
           forumObj.comments = [];
           this.forumList.push(forumObj);
+          this.forumDataProvider.setForumDataCache(forumObj);
         },
         error => {
           console.log(error);
