@@ -1,0 +1,16 @@
+<div class="list row">
+    <div class="col-md-6">
+      <h4>Forum List</h4>
+      <ul class="list-group">
+        <li
+          class="list-group-item"
+          *ngFor="let forum of forumIds; let i = index"
+        >
+  
+        <a class="m-4 btn btn-sm btn-danger" routerLink="/forum/{{forum}}">
+            Detail
+        </a>
+        </li>
+      </ul>
+    </div>
+</div>
