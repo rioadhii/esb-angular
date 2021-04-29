@@ -1,3 +1,5 @@
+import { CommentModel } from './comment.model';
+
 export class ForumModel {
     id: number;
     by: string;
@@ -8,4 +10,5 @@ export class ForumModel {
     type: string;
     kids: number[];
     text: string;
+    comments: Array<CommentModel>;
 }

@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 import { ForumService } from 'src/app/services/forum/forum.service';
 import { DetailForumService } from 'src/app/services/forum/detail-forum/detail-forum.service';
 import { ForumModel } from 'src/app/models/forum.model';
+import { CommentModel } from 'src/app/models/comment.model';
 
 @Component({
   selector: 'app-forum',
@@ -17,6 +18,8 @@ export class ForumComponent implements OnInit {
     private router: Router
   ) { }
   
+  page = 1;
+  pageSize = 20;
   forumIds: any;
   forumList: Array<ForumModel> = [];
 
@@ -52,10 +55,15 @@ export class ForumComponent implements OnInit {
           forumObj.time = result.time * 1000;
           forumObj.title = result.title;
           forumObj.type = result.type;
-          this.forumList.push(forumObj)
+          forumObj.comments = [];
+          this.forumList.push(forumObj);
         },
         error => {
           console.log(error);
         });
+  }
+
+  goToDetail(data: ForumModel): void {
+    debugger
   }
 }

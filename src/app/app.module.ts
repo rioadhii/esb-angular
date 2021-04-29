@@ -18,11 +18,11 @@ import { DetailForumComponent } from './components/forum/detail-forum/detail-for
     DetailForumComponent
   ],
   imports: [
+    NgbModule,
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
-    MomentPipesModule,
-    NgbModule
+    MomentPipesModule
   ],
   providers: [],
   bootstrap: [AppComponent]
