@@ -1,14 +1,20 @@
 <div class="row">
+    <!-- Start of loading indicator -->
     <div *ngIf="loading" class="col-md-12 container text-center">
         <h5>Fetching data...</h5>
     </div>
+    <!-- End of loading indicator -->
 
     <div *ngIf="!loading && forum" class="col-md-12">
+        <!--Start of navigation toolsbar-->
         <div class="breadcrumb">
             <a class="nounderline" routerLink="..">
                 <i class="fa fa-home"></i>&nbsp;<b>Forum</b>
             </a>&nbsp;>&nbsp;{{ forum.title }}
         </div>
+        <!--End of navigation toolsbar-->
+
+        <!--Start of main post-->
         <div class="card bg-faded">
             <table class="table">
                 <tbody>
@@ -34,24 +40,42 @@
                 </tbody>
             </table>
         </div>
+        <!--End of main post-->
+
+        <!--Start of comments section-->
         <div>
             <table class="table table-bordered">
                 <tbody>
+                    <!-- Start of comment rendering per item -->
                    <tr *ngFor="let comment of forum.comments">
                        <td>
                            <p>
-                            <small>Replied by 
-                                <i class="text-primary">
-                                    <b>{{ comment.by }}</b>
+                                <small>Replied by 
+                                    <i class="text-primary">
+                                        <b>{{ comment.by }}</b>
                                     </i>
                                 </small>
-                            <small class="pull-right">{{ comment.time | momentRelative }}</small>
+                                <small class="pull-right">{{ comment.time | momentRelative }}</small>
                            </p>   
                            <div [innerHTML]="comment.text"></div>
                        </td>
                    </tr>
+                   <!-- End of comment rendering per item -->
                 </tbody>
+
+                <!-- Start of no comments indicator -->
+                <tbody *ngIf="forum.comments.length === 0">
+                    <tr>
+                         <td>
+                             <p class="text-center mt-3">
+                                 This forum has no discussion yet
+                             </p> 
+                         </td>
+                     </tr>
+                 </tbody>
+                <!-- End of no comments indicator -->
             </table>
         </div>
+        <!--End of comments section-->
     </div>
 </div>
