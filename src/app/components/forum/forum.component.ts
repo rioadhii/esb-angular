@@ -19,6 +19,7 @@ export class ForumComponent implements OnInit {
     private router: Router
   ) { }
   
+  loading = true;
   page = 1;
   pageSize = 20;
   forumIds: any;
@@ -32,10 +33,15 @@ export class ForumComponent implements OnInit {
     this.forumService.getAll()
       .subscribe(
         result => {
-          this.forumIds = result;
-          this.forumIds.forEach((val) => {
-            this.getDetailForum(val);
-          });
+          this.forumIds = result; // dont forget here
+
+          if (this.forumIds === undefined) this.forumList = [];
+          else {
+            this.forumIds.forEach((val) => {
+              this.getDetailForum(val);
+            });
+          }
+          this.loading = false;
         },
         error => {
           console.log(error);

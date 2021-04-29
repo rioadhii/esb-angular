@@ -1,10 +1,19 @@
 <div class="row">
-    <div class="col-md-12">
+    <div *ngIf="loading" class="col-md-12 container text-center">
+        <h5>Fetching data...</h5>
+    </div>
+
+    <div *ngIf="!loading && forum" class="col-md-12">
+        <div class="breadcrumb">
+            <a class="nounderline" routerLink="..">
+                <i class="fa fa-home"></i>&nbsp;<b>Forum</b>
+            </a>&nbsp;>&nbsp;{{ forum.title }}
+        </div>
         <div class="card bg-faded">
             <table class="table">
                 <tbody>
                     <tr>
-                        <td class="main-post">
+                        <td class="first-row">
                             <p>
                                 <small>Posted by <i class="text-primary"><b>{{ forum.by }}</b></i></small>
                                 <small class="pull-right">{{ forum.time | momentRelative }}</small>
@@ -14,21 +23,30 @@
                             </p> 
                             <div [innerHTML]="forum.text"></div>
                             <small><b>Type: </b> {{ forum.type }} | </small>
-                            <small ngbTooltip="Score" placement="bottom"><i class="fa fa-thumbs-o-up"></i>&nbsp;{{ forum.score }} 
-                            </small>&nbsp;<small ngbTooltip="Comments" placement="bottom"><i class="fa fa-comments-o"></i>&nbsp;{{ forum.kids.length }}</small>
+                            <small ngbTooltip="Score" placement="bottom">
+                                <i class="fa fa-thumbs-o-up"></i>&nbsp;{{ forum.score }}
+                            </small>
+                            &nbsp;
+                            <small ngbTooltip="Comments" placement="bottom">
+                                <i class="fa fa-comments-o"></i>&nbsp;{{ forum.kids.length }}
+                            </small>
                         </td>
                     </tr>
                 </tbody>
             </table>
         </div>
         <div>
-            <table class="table">
+            <table class="table table-bordered">
                 <tbody>
                    <tr *ngFor="let comment of forum.comments">
                        <td>
                            <p>
-                           <small>Replied by <i class="text-primary"><b>{{ comment.by }}</b></i></small>
-                           <small class="pull-right">{{ comment.time | momentRelative }}</small>
+                            <small>Replied by 
+                                <i class="text-primary">
+                                    <b>{{ comment.by }}</b>
+                                    </i>
+                                </small>
+                            <small class="pull-right">{{ comment.time | momentRelative }}</small>
                            </p>   
                            <div [innerHTML]="comment.text"></div>
                        </td>

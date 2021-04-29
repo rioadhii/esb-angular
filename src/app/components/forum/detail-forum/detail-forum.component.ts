@@ -31,6 +31,8 @@ export class DetailForumComponent implements OnInit {
   };
 
   forumId: number;
+  loading = true;
+  
   ngOnInit(): void {
     this.forumId = this.route.snapshot.params['id'];
     this.getDetailForum(this.forumId);
@@ -40,21 +42,25 @@ export class DetailForumComponent implements OnInit {
     this.detailForumService.get(id)
       .subscribe(
         result => {
-          this.forum.by = result.by;
-          this.forum.descendants = result.descendants;
-          this.forum.id = result.id;
-          this.forum.kids = result.kids === undefined ? [] : result.kids;
-          this.forum.score = result.score;
-          this.forum.text = result.text;
-          this.forum.time = result.time * 1000;
-          this.forum.title = result.title;
-          this.forum.type = result.type;
-          this.forum.comments = [];
-          this.forum.kids.forEach((val) => {
-            this.getComment(val);
-          });
-
-          console.log(this.forum);
+          if (result != null) {
+            this.forum.by = result.by;
+            this.forum.descendants = result.descendants;
+            this.forum.id = result.id;
+            this.forum.kids = result.kids === undefined ? [] : result.kids;
+            this.forum.score = result.score;
+            this.forum.text = result.text;
+            this.forum.time = result.time * 1000;
+            this.forum.title = result.title;
+            this.forum.type = result.type;
+            this.forum.comments = [];
+            this.forum.kids.forEach((val) => {
+              this.getComment(val);
+            });
+          } else {
+            this.router.navigate(['/forum']);
+          }
+          
+          this.loading = false;
         },
         error => {
           console.log(error);
