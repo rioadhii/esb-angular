@@ -1,16 +1,19 @@
 <div class="list row">
-    <div class="col-md-6">
-      <h4>Forum List</h4>
-      <ul class="list-group">
-        <li
-          class="list-group-item"
-          *ngFor="let forum of forumIds; let i = index"
-        >
-  
-        <a class="m-4 btn btn-sm btn-danger" routerLink="/forum/{{forum}}">
-            Detail
-        </a>
-        </li>
-      </ul>
+    <div class="col-md-12">
+      <table class="table">
+        <tbody>
+        <tr *ngFor="let data of forumList; index as i">
+          <td>
+                <b><h5>{{ data.title }}</h5></b>
+                <small>{{ data.score }} points by <i>{{ data.by }} on {{ data.time }} | {{ data.kids.length }} comments</i></small>
+          </td>
+          <td>
+            <a class="m-4 btn btn-sm btn-danger" routerLink="/forum/{{data.id}}">
+                Detail
+            </a>
+          </td>
+        </tr>
+        </tbody>
+      </table>
     </div>
 </div>

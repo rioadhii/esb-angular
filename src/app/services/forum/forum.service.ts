@@ -3,7 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { environment } from '../../../environments/environment';
 
-const baseURL = environment.apiUrl + '/askstories.json?print=pretty';
+const baseURL = environment.apiUrl + '/askstories.json';
 
 @Injectable({
   providedIn: 'root'
