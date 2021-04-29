@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+
 import { ForumService } from 'src/app/services/forum/forum.service';
 import { DetailForumService } from 'src/app/services/forum/detail-forum/detail-forum.service';
 import { ForumModel } from 'src/app/models/forum.model';
@@ -63,7 +64,7 @@ export class ForumComponent implements OnInit {
         });
   }
 
-  goToDetail(data: ForumModel): void {
-    debugger
+  goToDetail(id: number): void {
+    this.router.navigate(['/forum/', id]);
   }
 }

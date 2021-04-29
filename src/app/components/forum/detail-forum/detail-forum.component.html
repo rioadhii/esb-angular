@@ -1,1 +1,40 @@
-<p>detail-forum works!</p>
+<div class="row">
+    <div class="col-md-12">
+        <div class="card bg-faded">
+            <table class="table">
+                <tbody>
+                    <tr>
+                        <td class="main-post">
+                            <p>
+                                <small>Posted by <i class="text-primary"><b>{{ forum.by }}</b></i></small>
+                                <small class="pull-right">{{ forum.time | momentRelative }}</small>
+                            </p>   
+                            <p>
+                                <b><h5>{{ forum.title }}</h5></b>
+                            </p> 
+                            <div [innerHTML]="forum.text"></div>
+                            <small><b>Type: </b> {{ forum.type }} | </small>
+                            <small ngbTooltip="Score" placement="bottom"><i class="fa fa-thumbs-o-up"></i>&nbsp;{{ forum.score }} 
+                            </small>&nbsp;<small ngbTooltip="Comments" placement="bottom"><i class="fa fa-comments-o"></i>&nbsp;{{ forum.kids.length }}</small>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <div>
+            <table class="table">
+                <tbody>
+                   <tr *ngFor="let comment of forum.comments">
+                       <td>
+                           <p>
+                           <small>Replied by <i class="text-primary"><b>{{ comment.by }}</b></i></small>
+                           <small class="pull-right">{{ comment.time | momentRelative }}</small>
+                           </p>   
+                           <div [innerHTML]="comment.text"></div>
+                       </td>
+                   </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
