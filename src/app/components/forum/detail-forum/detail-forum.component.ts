@@ -67,11 +67,11 @@ export class DetailForumComponent implements OnInit {
             // if no result, direct to this page below
             this.router.navigate(['/forum']);
           }
-          
-          this.loading = false;
         },
         error => {
           console.log(error);
+        }).add(() => {
+          this.loading = false;
         });
   }
 
@@ -88,7 +88,8 @@ export class DetailForumComponent implements OnInit {
         this.forum.comments.push(commentObj);
       },
       error => {
+        this.loading = false;
         console.log(error);
-      });
+      })
   }
 }

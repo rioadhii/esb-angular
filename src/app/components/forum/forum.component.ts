@@ -53,11 +53,11 @@ export class ForumComponent implements OnInit {
               this.getDetailForum(val);
             });
           }  
-
-          this.loading = false;
         },
         error => {
           console.log(error);
+        }).add(() => {
+          this.loading = false;
         });
   }
 
@@ -82,6 +82,7 @@ export class ForumComponent implements OnInit {
           this.forumDataProvider.setForumDataCache(forumObj);
         },
         error => {
+          this.loading = false;
           console.log(error);
         });
   }
