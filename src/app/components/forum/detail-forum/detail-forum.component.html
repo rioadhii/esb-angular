@@ -1,4 +1,4 @@
-<div class="row">
+<div class="list row">
     <!-- Start of loading indicator -->
     <div *ngIf="loading" class="col-md-12 container text-center">
         <h5>Fetching data...</h5>
@@ -16,7 +16,7 @@
 
         <!--Start of main post-->
         <div class="card bg-faded">
-            <table id="#tableContent" class="table">
+            <table class="table">
                 <tbody>
                     <tr>
                         <td class="first-row">
@@ -43,8 +43,8 @@
         <!--End of main post-->
 
         <!--Start of comments section-->
-        <div class="card border-0">
-            <table id="#tableComment" class="table table-bordered">
+        <div>
+            <table class="table table-bordered">
                 <tbody>
                     <!-- Start of comment rendering per item -->
                    <tr *ngFor="let comment of forum.comments">
@@ -63,6 +63,18 @@
                    </tr>
                    <!-- End of comment rendering per item -->
                 </tbody>
+
+                <!-- Start of no comments indicator -->
+                <tbody *ngIf="forum.comments.length === 0">
+                    <tr>
+                         <td>
+                             <p class="text-center mt-3">
+                                 This forum has no discussion yet
+                             </p> 
+                         </td>
+                     </tr>
+                 </tbody>
+                <!-- End of no comments indicator -->
             </table>
         </div>
         <!--End of comments section-->
