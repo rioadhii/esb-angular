@@ -14,7 +14,7 @@
       </div>
       <!--End of navigation toolsbar-->
 
-      <div *ngIf="forumList.length > 0">
+      <div class="card" *ngIf="forumList.length > 0">
         <table class="table">
           <tbody>
             <!--Start of row per item-->
@@ -34,22 +34,22 @@
             <!--End of row per item-->
           </tbody>
         </table>
-
-        <!--Start of pagination indicator-->
-        <div class="d-flex justify-content-center">
-          <ngb-pagination [collectionSize]="forumList.length" [pageSize]="pageSize" [(page)]="page" [maxSize]="0" [rotate]="true" [ellipses]="false" [boundaryLinks]="true"></ngb-pagination>
-        </div>
-        <!--End of pagination indicator-->
       </div>
 
       <!--Start of no data indicator-->
-      <div *ngIf="forumList.length === 0" class="container text-center">
+      <div *ngIf="forumList.length === 0" class="card container text-center p-2">
         <h5>No discussions available</h5>
       </div>
       <!--End of no data indicator-->
 
+      <!--Start of pagination indicator-->
+      <div *ngIf="forumList.length > 0" class="d-flex justify-content-center mt-2">
+        <ngb-pagination [collectionSize]="forumList.length" [pageSize]="pageSize" [(page)]="page" [maxSize]="0" [rotate]="true" [ellipses]="false" [boundaryLinks]="true"></ngb-pagination>
+      </div>
+      <!--End of pagination indicator-->
+
       <!--Start of total data indicator-->
-      <div class="d-flex justify-content-center">
+      <div class="d-flex justify-content-center mt-2">
         <p>Total discussions: {{ forumList.length }}</p>
       </div>
       <!--End of total data indicator-->

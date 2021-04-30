@@ -46,9 +46,11 @@ export class ForumComponent implements OnInit {
       .subscribe(
         result => {
           this.forumIds = result;
+
+          // handle no data on forum list
           if (this.forumIds === undefined) this.forumList = [];
           else {
-            // fetch detail forum for each data
+            // fetch detail for each forum data
             this.forumIds.forEach((val) => {
               this.getDetailForum(val);
             });
