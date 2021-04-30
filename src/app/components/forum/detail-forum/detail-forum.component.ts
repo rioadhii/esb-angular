@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
+import { NotifierService } from 'angular-notifier';
 
 import { DetailForumService } from 'src/app/services/forum/detail-forum/detail-forum.service';
 import { ForumModel } from 'src/app/models/forum.model';
@@ -12,12 +13,16 @@ import { CommentModel } from 'src/app/models/comment.model';
 })
 
 export class DetailForumComponent implements OnInit {
+  private readonly notifier: NotifierService;
 
   constructor(
-    private detailForumService: DetailForumService,
     private router: Router,
-    private route: ActivatedRoute
-  ) { }
+    private route: ActivatedRoute,
+    notifierService: NotifierService,
+    private detailForumService: DetailForumService
+  ) {
+    this.notifier = notifierService;
+  }
 
   // initialize vars and data
   forum: ForumModel = {
@@ -69,7 +74,7 @@ export class DetailForumComponent implements OnInit {
           }
         },
         error => {
-          console.log(error);
+          this.notifier.notify('error', 'Error while fetching data, try again later');
         }).add(() => {
           this.loading = false;
         });
@@ -89,7 +94,7 @@ export class DetailForumComponent implements OnInit {
       },
       error => {
         this.loading = false;
-        console.log(error);
+        this.notifier.notify('error', 'Error while fetching data, try again later');
       })
   }
 }

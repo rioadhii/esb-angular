@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { NotifierService } from 'angular-notifier';
 
 import { ForumService } from 'src/app/services/forum/forum.service';
 import { ForumDataProvider } from 'src/app/services/forum/forum.data-provider';
@@ -13,13 +14,17 @@ import { ForumModel } from 'src/app/models/forum.model';
   styleUrls: ['./forum.component.css']
 })
 export class ForumComponent implements OnInit {
+  private readonly notifier: NotifierService;
 
   constructor(
+    private router: Router,
+    notifierService: NotifierService,
     private forumService: ForumService,
     private forumDataProvider: ForumDataProvider,
     private detailForumService: DetailForumService,
-    private router: Router
-  ) { }
+  ) {
+    this.notifier = notifierService;
+  }
   
   // initialize vars and data
   loading = true;
@@ -32,7 +37,7 @@ export class ForumComponent implements OnInit {
     // get cache data from global vars then map to list forum data
     const cacheData = this.forumDataProvider.getForumDataCache;
     this.forumList = cacheData.map(item => Object.assign([], item));
-    
+
     if (this.forumList.length > 0) { // if any data in cache then render it
       this.loading = false;
     }
@@ -57,7 +62,7 @@ export class ForumComponent implements OnInit {
           }  
         },
         error => {
-          console.log(error);
+          this.notifier.notify('error', 'Error while fetching data, try again later');
         }).add(() => {
           this.loading = false;
         });
@@ -85,7 +90,7 @@ export class ForumComponent implements OnInit {
         },
         error => {
           this.loading = false;
-          console.log(error);
+          this.notifier.notify('error', 'Error while fetching data, try again later');
         });
   }
 

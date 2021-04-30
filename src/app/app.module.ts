@@ -3,6 +3,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { HttpClientModule } from '@angular/common/http';
 import { MomentPipesModule } from 'ng-moment-pipes';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { NotifierModule } from 'angular-notifier';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -21,7 +22,22 @@ import { DetailForumComponent } from './components/forum/detail-forum/detail-for
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
-    MomentPipesModule
+    MomentPipesModule,
+    NotifierModule.withConfig({
+      behaviour: {
+        autoHide: 5000,
+        stacking: 4
+      },
+      position: {
+        vertical: {
+          position: 'bottom'
+        },
+        horizontal: {
+          position: 'right'
+        }
+      },
+      theme: 'material'
+    })
   ],
   providers: [],
   bootstrap: [AppComponent]
