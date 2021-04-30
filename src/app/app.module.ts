@@ -10,7 +10,7 @@ import { AppComponent } from './app.component';
 
 import { ForumComponent } from './components/forum/forum.component';
 import { DetailForumComponent } from './components/forum/detail-forum/detail-forum.component';
-import { ContentComponent } from './components/forum/content/content/content.component';
+import { ContentComponent } from './components/forum/content/content.component';
 
 @NgModule({
   declarations: [
