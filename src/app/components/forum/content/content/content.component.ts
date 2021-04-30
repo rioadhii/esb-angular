@@ -4,8 +4,7 @@ import { ForumModel } from 'src/app/models/forum.model';
 
 @Component({
   selector: 'app-content',
-  templateUrl: './content.component.html',
-  styleUrls: ['./content.component.css']
+  templateUrl: './content.component.html'
 })
 export class ContentComponent {
   @Input() forum: ForumModel;
