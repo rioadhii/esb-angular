@@ -1,9 +1,9 @@
-import { NgModule } from '@angular/core';
+import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { HttpClientModule } from '@angular/common/http';
 import { MomentPipesModule } from 'ng-moment-pipes';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
-import { NotifierModule } from 'angular-notifier';
+import { NotifierModule } from "angular-notifier";
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -40,6 +40,9 @@ import { DetailForumComponent } from './components/forum/detail-forum/detail-for
     })
   ],
   providers: [],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
+  schemas: [
+    CUSTOM_ELEMENTS_SCHEMA
+  ],
 })
 export class AppModule { }
