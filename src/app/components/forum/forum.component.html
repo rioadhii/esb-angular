@@ -20,15 +20,8 @@
             <!--Start of row per item-->
             <tr class="clickable" (click)="goToDetail(data.id)" *ngFor="let data of forumList | slice: (page-1) * pageSize : (page-1) * pageSize + pageSize; index as i">
               <td [ngClass]="{'first-row': i === 0}">
-                  <p>
-                    <small>Posted by <i class="text-primary"><b>{{ data.by }}</b></i></small>
-                    <small class="pull-right">{{ data.time | momentRelative }}</small>
-                  </p>   
-                  <p>
-                    <b><h5>{{ data.title }}</h5></b>
-                  </p> 
-                  <small ngbTooltip="Score" placement="bottom"><i class="fa fa-thumbs-o-up"></i>&nbsp;{{ data.score }} 
-                  </small>&nbsp;<small ngbTooltip="Comments" placement="bottom"><i class="fa fa-comments-o"></i>&nbsp;{{ data.kids.length }}</small>
+                <!-- Render from angular component -->
+                <app-content [forum]="data" [isOnListPage]="true"></app-content>
               </td>
             </tr>
             <!--End of row per item-->

@@ -1,1 +1,17 @@
-<p>content works!</p>
+<div>
+    <p>
+        <small>Posted by <i class="text-primary"><b>{{ forum.by }}</b></i></small>
+        <small class="pull-right">{{ forum.time | momentRelative }}</small>
+    </p>   
+    <p>
+        <b><h5>{{ forum.title }}</h5></b>
+    </p> 
+    <div *ngIf="!isOnListPage" [innerHTML]="forum.text"></div>
+    <small ngbTooltip="Score" placement="bottom">
+        <i class="fa fa-thumbs-o-up"></i>&nbsp;{{ forum.score }}
+    </small>
+    &nbsp;
+    <small ngbTooltip="Comments" placement="bottom">
+        <i class="fa fa-comments-o"></i>&nbsp;{{ forum.kids.length }}
+    </small>
+</div>

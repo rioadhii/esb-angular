@@ -1,15 +1,13 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input} from '@angular/core';
+
+import { ForumModel } from 'src/app/models/forum.model';
 
 @Component({
   selector: 'app-content',
   templateUrl: './content.component.html',
   styleUrls: ['./content.component.css']
 })
-export class ContentComponent implements OnInit {
-
-  constructor() { }
-
-  ngOnInit(): void {
-  }
-
+export class ContentComponent {
+  @Input() forum: ForumModel;
+  @Input() isOnListPage: boolean;
 }
