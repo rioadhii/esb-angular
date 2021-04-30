@@ -45,7 +45,7 @@
                                 </small>
                                 <small class="pull-right">{{ comment.time | momentRelative }}</small>
                            </p>   
-                           <div [innerHTML]="comment.text"></div>
+                           <div style="word-wrap: break-word;" [innerHTML]="comment.text"></div>
                        </td>
                    </tr>
                    <!-- End of comment rendering per item -->
